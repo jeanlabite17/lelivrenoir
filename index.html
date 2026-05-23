@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO dynamique — mis à jour par JS selon le profil actif -->
+  <title>Le Livre Noir — Annuaire</title>
+  <meta name="description" content="Découvrez les profils du Livre Noir." />
+  <link rel="canonical" href="" id="canonical" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Le Livre Noir" />
+  <meta property="og:title" content="Le Livre Noir" id="og-title" />
+  <meta property="og:description" content="" id="og-desc" />
+  <meta property="og:image" content="" id="og-image" />
+
+  <!-- Schema.org JSON-LD injecté dynamiquement par JS -->
+  <script id="schema-jsonld" type="application/ld+json">{}</script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f7f5f0;
+      --paper2: #eeebe3;
+      --accent: #0a0a0a;
+      --muted: #888;
+      --border: rgba(10,10,10,0.12);
+      --radius: 4px;
+      --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .logo span { font-style: italic; font-weight: 300; }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--paper2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 14px;
+      transition: border-color var(--transition);
+    }
+    .search-wrap:focus-within { border-color: var(--ink); }
+    .search-wrap svg { width: 15px; height: 15px; opacity: 0.45; flex-shrink: 0; }
+    #search-input {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--ink);
+      width: 220px;
+    }
+    #search-input::placeholder { color: var(--muted); }
+
+    /* MAIN */
+    main { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
+
+    .listing-header {
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .listing-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+    .listing-count {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+
+    .card {
+      cursor: pointer;
+      animation: fadeUp 0.4s both;
+    }
+    .card:nth-child(2) { animation-delay: 0.05s; }
+    .card:nth-child(3) { animation-delay: 0.1s; }
+    .card:nth-child(4) { animation-delay: 0.15s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--paper2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 0.85rem;
+      transition: border-color var(--transition), transform var(--transition);
+      position: relative;
+    }
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-photo .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      opacity: 0.3;
+    }
+    .card-photo .placeholder svg { width: 36px; height: 36px; }
+
+    .card:hover .card-photo { border-color: rgba(10,10,10,0.3); }
+    .card:hover .card-photo img { transform: scale(1.04); }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .card-profession {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 1px;
+    }
+    .card-city {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
+    /* PROFILE PANEL */
+    .profile-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.45);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .profile-backdrop.open { display: block; }
+    .profile-backdrop.visible { opacity: 1; }
+
+    .profile-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(520px, 100vw);
+      background: var(--paper);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-panel.open { transform: translateX(0); }
+
+    .panel-inner { padding: 2.5rem 2.5rem 4rem; flex: 1; }
+
+    .panel-close {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      padding: 0;
+      transition: color var(--transition);
+    }
+    .panel-close:hover { color: var(--ink); }
+    .panel-close svg { width: 14px; height: 14px; }
+
+    .panel-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--paper2);
+      margin-bottom: 1.5rem;
+    }
+    .panel-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .panel-photo .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      opacity: 0.2;
+    }
+    .panel-photo .placeholder svg { width: 64px; height: 64px; }
+
+    .panel-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .panel-profession {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .panel-city {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .panel-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+
+    .panel-bio {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #444;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+    .contact-list li { display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--ink); }
+    .contact-list li svg { width: 14px; height: 14px; opacity: 0.5; flex-shrink: 0; }
+    .contact-list a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color var(--transition); }
+    .contact-list a:hover { border-color: var(--ink); }
+
+    .socials-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 6px 12px;
+      transition: all var(--transition);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .social-link svg { width: 13px; height: 13px; }
+    .social-link:hover { color: var(--ink); border-color: var(--ink); background: var(--paper2); }
+
+    /* Extra photos */
+    .extra-photos { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 1.5rem; }
+    .extra-photo {
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--paper2);
+      border: 1px solid var(--border);
+    }
+    .extra-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" onclick="showListing()" href="#"><span>Le</span> Livre Noir</a>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="search-input" type="search" placeholder="Rechercher un profil…" autocomplete="off" />
+  </div>
+</nav>
+
+<main id="listing-view">
+  <div class="listing-header">
+    <h1 class="listing-title">Tous les profils</h1>
+    <span class="listing-count" id="profile-count"></span>
+  </div>
+  <div class="grid" id="profile-grid"></div>
+</main>
+
+<!-- Backdrop -->
+<div class="profile-backdrop" id="backdrop" onclick="closeProfile()"></div>
+
+<!-- Panneau profil -->
+<aside class="profile-panel" id="profile-panel" role="complementary" aria-label="Profil">
+  <div class="panel-inner">
+    <button class="panel-close" onclick="closeProfile()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour
+    </button>
+    <div class="panel-photo" id="panel-photo"></div>
+    <p class="panel-profession" id="panel-profession"></p>
+    <h2 class="panel-name" id="panel-name"></h2>
+    <p class="panel-city" id="panel-city"></p>
+    <div class="panel-divider"></div>
+    <p class="panel-bio" id="panel-bio"></p>
+    <ul class="contact-list" id="panel-contact"></ul>
+    <div class="panel-divider" id="socials-divider" style="display:none"></div>
+    <div class="socials-row" id="panel-socials"></div>
+    <div class="extra-photos" id="panel-photos"></div>
+  </div>
+</aside>
+
+<script src="data.js"></script>
+<script>
+const SITE_URL = window.location.origin + window.location.pathname;
+
+// Icônes réseaux sociaux
+const SOCIAL_ICONS = {
+  instagram: { label: "Instagram", svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>` },
+  linkedin:  { label: "LinkedIn",  svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>` },
+  twitter:   { label: "X / Twitter", svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M4 20 20 4"/></svg>` },
+  github:    { label: "GitHub",    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>` },
+  tiktok:    { label: "TikTok",    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>` },
+  facebook:  { label: "Facebook",  svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>` },
+  youtube:   { label: "YouTube",   svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>` },
+};
+
+// ---- Rendu listing ----
+function renderGrid(profiles) {
+  const grid = document.getElementById("profile-grid");
+  const count = document.getElementById("profile-count");
+  count.textContent = profiles.length + " membre" + (profiles.length > 1 ? "s" : "");
+
+  if (!profiles.length) {
+    grid.innerHTML = `<p class="no-results">Aucun profil trouvé.</p>`;
+    return;
+  }
+
+  grid.innerHTML = profiles.map((p, i) => `
+    <article class="card" onclick="openProfile('${p.id}')" role="button" tabindex="0"
+      aria-label="Voir le profil de ${p.firstName} ${p.lastName}"
+      style="animation-delay:${i * 0.05}s"
+      onkeydown="if(event.key==='Enter')openProfile('${p.id}')">
+      <div class="card-photo">
+        ${p.photo
+          ? `<img src="${p.photo}" alt="Photo de ${p.firstName} ${p.lastName}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'placeholder\'>${personIcon()}</div>'" />`
+          : `<div class="placeholder">${personIcon()}</div>`}
+      </div>
+      <p class="card-name">${p.firstName} ${p.lastName}</p>
+      <p class="card-profession">${p.profession}</p>
+      <p class="card-city">${p.city}</p>
+    </article>
+  `).join("");
+}
+
+function personIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+}
+
+// ---- Recherche ----
+document.getElementById("search-input").addEventListener("input", function() {
+  const q = this.value.toLowerCase().trim();
+  const filtered = q
+    ? PROFILES.filter(p =>
+        (p.firstName + " " + p.lastName + " " + p.profession + " " + p.city).toLowerCase().includes(q))
+    : PROFILES;
+  renderGrid(filtered);
+});
+
+// ---- Ouvrir profil ----
+function openProfile(id) {
+  const p = PROFILES.find(x => x.id === id);
+  if (!p) return;
+
+  // Photo principale
+  const photoEl = document.getElementById("panel-photo");
+  photoEl.innerHTML = p.photo
+    ? `<img src="${p.photo}" alt="Photo de ${p.firstName} ${p.lastName}" />`
+    : `<div class="placeholder">${personIcon()}</div>`;
+
+  document.getElementById("panel-name").textContent = p.firstName + " " + p.lastName;
+  document.getElementById("panel-profession").textContent = p.profession;
+  document.getElementById("panel-city").textContent = p.city;
+  document.getElementById("panel-bio").textContent = p.bio;
+
+  // Contacts
+  const contact = document.getElementById("panel-contact");
+  contact.innerHTML = "";
+  if (p.phone) {
+    contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><a href="tel:${p.phone}">${p.phone}</a></li>`;
+  }
+  if (p.website) {
+    const display = p.website.replace(/^https?:\/\//, "");
+    contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><a href="${p.website}" target="_blank" rel="noopener">${display}</a></li>`;
+  }
+
+  // Réseaux sociaux
+  const socialsEl = document.getElementById("panel-socials");
+  const divider = document.getElementById("socials-divider");
+  const activeSocials = Object.entries(p.socials || {}).filter(([,v]) => v);
+  socialsEl.innerHTML = activeSocials.map(([k, url]) =>
+    `<a class="social-link" href="${url}" target="_blank" rel="noopener">${SOCIAL_ICONS[k]?.svg || ""}${SOCIAL_ICONS[k]?.label || k}</a>`
+  ).join("");
+  divider.style.display = activeSocials.length ? "block" : "none";
+
+  // Photos supplémentaires
+  const photosEl = document.getElementById("panel-photos");
+  const extraPhotos = (p.photos || []).filter(Boolean);
+  photosEl.innerHTML = extraPhotos.map(src =>
+    `<div class="extra-photo"><img src="${src}" alt="" loading="lazy" /></div>`
+  ).join("");
+
+  // SEO dynamique
+  updateSEO(p);
+
+  // Ouvrir le panneau
+  const backdrop = document.getElementById("backdrop");
+  const panel = document.getElementById("profile-panel");
+  backdrop.classList.add("open");
+  requestAnimationFrame(() => {
+    backdrop.classList.add("visible");
+    panel.classList.add("open");
+  });
+  document.body.style.overflow = "hidden";
+
+  // URL
+  history.pushState({ profileId: id }, "", "#" + id);
+}
+
+// ---- Fermer profil ----
+function closeProfile() {
+  const backdrop = document.getElementById("backdrop");
+  const panel = document.getElementById("profile-panel");
+  backdrop.classList.remove("visible");
+  panel.classList.remove("open");
+  setTimeout(() => backdrop.classList.remove("open"), 300);
+  document.body.style.overflow = "";
+  history.pushState({}, "", window.location.pathname);
+  resetSEO();
+}
+
+// ---- SEO dynamique ----
+function updateSEO(p) {
+  const fullName = p.firstName + " " + p.lastName;
+  const desc = `${fullName} — ${p.profession}, ${p.city}. ${p.bio.substring(0, 130)}…`;
+  document.title = fullName + " — Le Livre Noir";
+  document.querySelector("meta[name='description']").setAttribute("content", desc);
+  document.getElementById("og-title").setAttribute("content", fullName + " — Le Livre Noir");
+  document.getElementById("og-desc").setAttribute("content", desc);
+  if (p.photo) document.getElementById("og-image").setAttribute("content", SITE_URL + p.photo);
+  document.getElementById("canonical").setAttribute("href", SITE_URL + "#" + p.id);
+
+  // Schema.org Person
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": fullName,
+    "givenName": p.firstName,
+    "familyName": p.lastName,
+    "jobTitle": p.profession,
+    "address": { "@type": "PostalAddress", "addressLocality": p.city },
+    "description": p.bio,
+    "url": SITE_URL + "#" + p.id,
+  };
+  if (p.phone) schema.telephone = p.phone;
+  if (p.website) schema.url = p.website;
+  if (p.photo) schema.image = SITE_URL + p.photo;
+  if (p.socials?.linkedin) schema.sameAs = [p.socials.linkedin];
+  document.getElementById("schema-jsonld").textContent = JSON.stringify(schema);
+}
+
+function resetSEO() {
+  document.title = "Le Livre Noir — Annuaire";
+  document.querySelector("meta[name='description']").setAttribute("content", "Découvrez les profils du Livre Noir.");
+  document.getElementById("schema-jsonld").textContent = "{}";
+}
+
+function showListing() {
+  closeProfile();
+}
+
+// ---- Navigation URL ----
+window.addEventListener("popstate", (e) => {
+  if (e.state?.profileId) openProfile(e.state.profileId);
+  else closeProfile();
+});
+
+// ---- Fermer avec Escape ----
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeProfile();
+});
+
+// ---- Init ----
+renderGrid(PROFILES);
+
+// Ouvrir profil depuis URL hash
+const hash = window.location.hash.replace("#", "");
+if (hash && PROFILES.find(p => p.id === hash)) {
+  setTimeout(() => openProfile(hash), 100);
+}
+</script>
+</body>
+</html>

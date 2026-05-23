@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Le Livre Noir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0a0a0a; --paper: #f7f5f0; --paper2: #eeebe3;
+      --muted: #888; --border: rgba(10,10,10,0.12);
+      --green: #1a6b3a; --green-bg: #eaf4ee;
+      --radius: 4px;
+    }
+    body { background: var(--paper2); font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    nav { background: var(--paper); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.2rem; }
+    .logo span { font-style: italic; font-weight: 300; }
+    .nav-badge { font-size: 0.72rem; background: var(--ink); color: var(--paper); padding: 3px 10px; border-radius: var(--radius); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.4rem; }
+    .subtitle { font-size: 0.83rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.6; }
+
+    .card { background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; }
+    .card-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-col { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-full { margin-bottom: 1rem; }
+
+    label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.03em; }
+
+    input[type=text], input[type=tel], input[type=url], textarea {
+      width: 100%;
+      background: var(--paper2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 9px 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { border-color: var(--ink); }
+    textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+    .socials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .social-field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .photos-section { display: flex; flex-direction: column; gap: 0.75rem; }
+    .photo-row { display: flex; gap: 8px; align-items: center; }
+    .photo-row input { flex: 1; }
+    .photo-row button { background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 10px; cursor: pointer; font-size: 0.8rem; color: var(--muted); transition: all 0.15s; }
+    .photo-row button:hover { border-color: var(--ink); color: var(--ink); }
+    .add-photo-btn { align-self: flex-start; background: none; border: 1px dashed var(--border); border-radius: var(--radius); padding: 8px 16px; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .add-photo-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+    .generate-btn {
+      width: 100%;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .generate-btn:hover { opacity: 0.8; }
+
+    .output-block { display: none; margin-top: 1.5rem; }
+    .output-block.visible { display: block; }
+
+    .output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+    .output-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .copy-btn { background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .copy-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: var(--green); }
+
+    pre {
+      background: #111;
+      color: #e8e6df;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      font-family: 'Courier New', monospace;
+    }
+
+    .instructions { background: var(--green-bg); border: 1px solid rgba(26,107,58,0.2); border-radius: var(--radius); padding: 1.25rem; margin-top: 1.25rem; }
+    .instructions p { font-size: 0.83rem; line-height: 1.7; color: var(--green); }
+    .instructions strong { font-weight: 500; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .socials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo"><span>Le</span> Livre Noir</span>
+  <span class="nav-badge">Admin</span>
+</nav>
+
+<div class="container">
+  <h1>Ajouter un profil</h1>
+  <p class="subtitle">Remplis le formulaire ci-dessous. Le code généré est à coller dans <code>data.js</code>.</p>
+
+  <!-- Infos de base -->
+  <div class="card">
+    <p class="card-title">Informations principales</p>
+    <div class="form-row">
+      <div class="form-col">
+        <label for="f-first">Prénom *</label>
+        <input type="text" id="f-first" placeholder="Sofia" />
+      </div>
+      <div class="form-col">
+        <label for="f-last">Nom *</label>
+        <input type="text" id="f-last" placeholder="Kaminski" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col">
+        <label for="f-job">Profession *</label>
+        <input type="text" id="f-job" placeholder="Designer produit" />
+      </div>
+      <div class="form-col">
+        <label for="f-city">Ville *</label>
+        <input type="text" id="f-city" placeholder="Paris" />
+      </div>
+    </div>
+    <div class="form-full">
+      <label for="f-bio">Bio</label>
+      <textarea id="f-bio" placeholder="Quelques lignes de description…"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-col">
+        <label for="f-phone">Téléphone</label>
+        <input type="tel" id="f-phone" placeholder="+33 6 12 34 56 78" />
+      </div>
+      <div class="form-col">
+        <label for="f-web">Site web</label>
+        <input type="url" id="f-web" placeholder="https://monsite.com" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo de profil -->
+  <div class="card">
+    <p class="card-title">Photo de profil</p>
+    <div class="form-full" style="margin:0">
+      <label for="f-photo" style="margin-bottom:0.35rem;display:block">Chemin de la photo (depuis le dossier du site)</label>
+      <input type="text" id="f-photo" placeholder="images/sofia.jpg" />
+    </div>
+    <p style="font-size:0.77rem;color:var(--muted);margin-top:0.5rem">Place la photo dans le dossier <code>images/</code> de ton projet GitHub, puis renseigne le chemin ici.</p>
+  </div>
+
+  <!-- Photos supplémentaires -->
+  <div class="card">
+    <p class="card-title">Photos supplémentaires (galerie)</p>
+    <div class="photos-section" id="extra-photos-list">
+      <div class="photo-row">
+        <input type="text" placeholder="images/sofia-2.jpg" class="extra-photo-input" />
+        <button onclick="removePhotoRow(this)">✕</button>
+      </div>
+    </div>
+    <button class="add-photo-btn" onclick="addPhotoRow()" style="margin-top:0.75rem">+ Ajouter une photo</button>
+  </div>
+
+  <!-- Réseaux sociaux -->
+  <div class="card">
+    <p class="card-title">Réseaux sociaux (laisse vide si absent)</p>
+    <div class="socials-grid">
+      <div class="social-field"><label>Instagram</label><input type="url" id="s-instagram" placeholder="https://instagram.com/…" /></div>
+      <div class="social-field"><label>LinkedIn</label><input type="url" id="s-linkedin" placeholder="https://linkedin.com/in/…" /></div>
+      <div class="social-field"><label>X / Twitter</label><input type="url" id="s-twitter" placeholder="https://twitter.com/…" /></div>
+      <div class="social-field"><label>GitHub</label><input type="url" id="s-github" placeholder="https://github.com/…" /></div>
+      <div class="social-field"><label>TikTok</label><input type="url" id="s-tiktok" placeholder="https://tiktok.com/@…" /></div>
+      <div class="social-field"><label>Facebook</label><input type="url" id="s-facebook" placeholder="https://facebook.com/…" /></div>
+      <div class="social-field"><label>YouTube</label><input type="url" id="s-youtube" placeholder="https://youtube.com/@…" /></div>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="generate()">Générer le code →</button>
+
+  <!-- Résultat -->
+  <div class="output-block" id="output-block">
+    <div class="output-header">
+      <span class="output-label">Code à coller dans data.js</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyCode()">Copier</button>
+    </div>
+    <pre id="output-code"></pre>
+    <div class="instructions">
+      <p>
+        <strong>Comment ajouter ce profil :</strong><br/>
+        1. Ouvre le fichier <code>data.js</code><br/>
+        2. Dans le tableau <code>PROFILES = [...]</code>, colle ce bloc avant le dernier <code>]</code> (précédé d'une virgule)<br/>
+        3. Place la photo dans le dossier <code>images/</code><br/>
+        4. Sauvegarde et push sur GitHub — le profil apparaît en ligne.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function slugify(str) {
+  return str.toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim().replace(/\s+/g, "-");
+}
+
+function addPhotoRow() {
+  const list = document.getElementById("extra-photos-list");
+  const row = document.createElement("div");
+  row.className = "photo-row";
+  row.innerHTML = `<input type="text" placeholder="images/photo.jpg" class="extra-photo-input" /><button onclick="removePhotoRow(this)">✕</button>`;
+  list.appendChild(row);
+}
+
+function removePhotoRow(btn) {
+  const list = document.getElementById("extra-photos-list");
+  if (list.children.length > 1) btn.parentElement.remove();
+  else btn.previousElementSibling.value = "";
+}
+
+function generate() {
+  const first = document.getElementById("f-first").value.trim();
+  const last  = document.getElementById("f-last").value.trim();
+  const job   = document.getElementById("f-job").value.trim();
+  const city  = document.getElementById("f-city").value.trim();
+
+  if (!first || !last || !job || !city) {
+    alert("Remplis au minimum : prénom, nom, profession et ville.");
+    return;
+  }
+
+  const id = slugify(first + "-" + last);
+  const bio = document.getElementById("f-bio").value.trim();
+  const phone = document.getElementById("f-phone").value.trim();
+  const website = document.getElementById("f-web").value.trim();
+  const photo = document.getElementById("f-photo").value.trim();
+
+  const extraPhotos = Array.from(document.querySelectorAll(".extra-photo-input"))
+    .map(i => i.value.trim()).filter(Boolean);
+
+  const socials = ["instagram","linkedin","twitter","github","tiktok","facebook","youtube"]
+    .reduce((acc, k) => { acc[k] = document.getElementById("s-"+k).value.trim(); return acc; }, {});
+
+  const socialsStr = Object.entries(socials)
+    .map(([k,v]) => `      ${k}: "${v}"`)
+    .join(",\n");
+
+  const photosStr = extraPhotos.map(p => `"${p}"`).join(", ");
+
+  const code = `  {
+    id: "${id}",
+    firstName: "${first}",
+    lastName: "${last}",
+    profession: "${job}",
+    city: "${city}",
+    bio: "${bio.replace(/"/g, '\\"')}",
+    photo: "${photo}",
+    photos: [${photosStr}],
+    phone: "${phone}",
+    website: "${website}",
+    socials: {
+${socialsStr}
+    }
+  },`;
+
+  document.getElementById("output-code").textContent = code;
+  document.getElementById("output-block").classList.add("visible");
+  document.getElementById("output-block").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function copyCode() {
+  const code = document.getElementById("output-code").textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById("copy-btn");
+    btn.textContent = "Copié ✓";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copier"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
