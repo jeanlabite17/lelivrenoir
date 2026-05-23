@@ -7,42 +7,21 @@
 
 const PROFILES = [
   {
-    id: "sofia-kaminski",
-    firstName: "Sofia",
-    lastName: "Kaminski",
-    profession: "Designer produit",
+    id: "laurent-demarly",
+    firstName: "Laurent",
+    lastName: "DEMARLY",
+    profession: "Coache personnel",
     city: "Paris",
-    bio: "Basée à Paris, Sofia travaille à l'intersection du design et de la technologie. Elle a contribué à des projets pour des startups et grandes marques en Europe. Passionnée par l'expérience utilisateur et les systèmes visuels cohérents.",
+    bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
     photo: "images/sofia.jpg",
     photos: [],
-    phone: "+33 6 12 34 56 78",
-    website: "https://sofia-kaminski.com",
+    phone: "+33 7 49 76 59 27",
+    website: "https://laurentdemarly.fr/",
     socials: {
-      instagram: "https://instagram.com/sofiakaminski",
-      linkedin: "https://linkedin.com/in/sofiakaminski",
+      instagram: "https://www.instagram.com/ldcoaching_/",
+      linkedin: "",
       twitter: "",
       github: "",
-      tiktok: "",
-      facebook: "",
-      youtube: ""
-    }
-  },
-  {
-    id: "marc-leblanc",
-    firstName: "Marc",
-    lastName: "Leblanc",
-    profession: "Développeur full-stack",
-    city: "Lyon",
-    bio: "Développeur passionné par la performance et les architectures modernes. Open-source contributor actif, il partage régulièrement ses projets sur GitHub et intervient dans des conférences tech.",
-    photo: "images/marc.jpg",
-    photos: [],
-    phone: "",
-    website: "https://marcleblanc.dev",
-    socials: {
-      instagram: "",
-      linkedin: "https://linkedin.com/in/marcleblanc",
-      twitter: "https://twitter.com/marcleblanc",
-      github: "https://github.com/marcleblanc",
       tiktok: "",
       facebook: "",
       youtube: ""
