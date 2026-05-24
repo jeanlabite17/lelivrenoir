@@ -435,7 +435,7 @@ function renderGrid(profiles) {
       onkeydown="if(event.key==='Enter')openProfile('${p.id}')">
       <div class="card-photo">
         ${p.photo
-          ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'placeholder\\'>${personIcon()}</div>'" />`
+          ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" loading="lazy" onerror="this.style.display='none'" />`
           : `<div class="placeholder">${personIcon()}</div>`}
       </div>
       <p class="card-name">${p.firstName} ${p.lastName}</p>
