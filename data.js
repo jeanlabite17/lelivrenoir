@@ -10,7 +10,7 @@ const PROFILES = [
     id: "laurent-demarly",
     firstName: "Laurent",
     lastName: "DEMARLY",
-    profession: "Coache personnel",
+    profession: "Coach personnel",
     city: "Paris",
     bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
     photo: "images/laurent-damarly.jpg",
