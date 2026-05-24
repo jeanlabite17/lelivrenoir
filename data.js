@@ -13,8 +13,8 @@ const PROFILES = [
     profession: "Coache personnel",
     city: "Paris",
     bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
-    photo: "images/sofia.jpg",
-    photos: [],
+    photo: "images/laurent-damarly.jpg",
+    photos: [images/tess-laurent-damarly.jpg],
     phone: "+33 7 49 76 59 27",
     website: "https://laurentdemarly.fr/",
     socials: {
@@ -23,7 +23,7 @@ const PROFILES = [
       twitter: "",
       github: "",
       tiktok: "",
-      facebook: "",
+      facebook: "https://www.facebook.com/ECLAIREURCOACH/",
       youtube: ""
     }
   },
