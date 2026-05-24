@@ -12,7 +12,7 @@ const PROFILES = [
     lastName: "DEMARLY",
     profession: "Coach personnel",
     city: "Paris",
-    bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
+    bio: "Témoignage d'escorte : Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
     photo: "images/laurent-damarly.jpg",
     photos: ["images/tess-laurent-damarly.jpg", "images/linkedin-laurent-damarly.jpg"],
     phone: "+33 7 49 76 59 27",
