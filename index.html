@@ -145,9 +145,13 @@
     @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; } }
 
-    .card {
+   .card {
       cursor: pointer;
       animation: fadeUp 0.4s both;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg);
     }
     .card:nth-child(2) { animation-delay: 0.05s; }
     .card:nth-child(3) { animation-delay: 0.1s; }
@@ -163,9 +167,8 @@
       aspect-ratio: 1;
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 8px 8px 0 0;
       overflow: hidden;
-      margin-bottom: 0.75rem;
       transition: border-color var(--ease);
     }
     .card-photo img {
@@ -187,12 +190,13 @@
     .card:hover .card-photo { border-color: var(--border2); }
     .card:hover .card-photo img { transform: scale(1.04); }
 
-    .card-name {
+   .card-name {
       font-size: 0.9rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.01em;
       color: var(--text);
       margin-bottom: 3px;
+      padding: 0.75rem 0.75rem 0;
     }
     .card-profession {
       font-size: 0.72rem;
@@ -201,11 +205,13 @@
       text-transform: uppercase;
       letter-spacing: 0.07em;
       margin-bottom: 2px;
+      padding: 0 0.75rem;
     }
     .card-city {
       font-size: 0.72rem;
       color: var(--muted2);
       font-weight: 300;
+      padding: 0 0.75rem 0.75rem;
     }
 
     .no-results {
@@ -554,10 +560,12 @@ function renderGrid(profiles) {
         ${p.photo
           ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" loading="lazy" onerror="this.style.display='none'" />`
           : `<div class="placeholder">${personIcon()}</div>`}
+     </div>
+      <div style="border-top: 0.5px solid var(--border);">
+        <p class="card-name">${p.firstName} ${p.lastName}</p>
+        <p class="card-profession">${p.profession}</p>
+        <p class="card-city">${p.city}</p>
       </div>
-      <p class="card-name">${p.firstName} ${p.lastName}</p>
-      <p class="card-profession">${p.profession}</p>
-      <p class="card-city">${p.city}</p>
     </article>
   `).join("");
 }
