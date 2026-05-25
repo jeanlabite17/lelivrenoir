@@ -47,9 +47,9 @@
       top: 0;
       z-index: 100;
       background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2.5rem;
-      height: 60px;
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -58,31 +58,30 @@
     .logo {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0;
-      text-transform: none;
+      font-size: 13px;
+      letter-spacing: -0.01em;
       color: var(--text);
       text-decoration: none !important;
       cursor: pointer;
     }
 
     .nav-tagline {
-      font-size: 1rem;
-  font-weight: 700;
-  font-family: Helvetica, Arial, sans-serif;
-  color: var(--text);
-  letter-spacing: 0;
-}
+      font-size: 12px;
+      font-weight: 400;
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
     .nav-tagline-mobile {
-  display: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  font-family: Helvetica, Arial, sans-serif;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
+      display: none;
+      padding: 0.65rem 2rem;
+      font-size: 12px;
+      font-weight: 400;
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--muted);
+      border-bottom: 0.5px solid var(--border);
+      background: var(--bg);
+    }
 
 @media (max-width: 640px) {
   .nav-tagline { display: none; }
@@ -93,11 +92,11 @@
     .search-wrap {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
       background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 7px 13px;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
       transition: border-color var(--ease);
     }
     .search-wrap:focus-within { border-color: var(--border2); }
@@ -107,10 +106,10 @@
       border: none;
       outline: none;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.83rem;
+      font-size: 12px;
       font-weight: 300;
       color: var(--text);
-      width: 200px;
+      width: 180px;
     }
     #search-input::placeholder { color: var(--muted); }
 
