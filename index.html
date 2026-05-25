@@ -701,18 +701,22 @@ function updateLightbox() {
   document.querySelector(".lightbox-prev").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
   document.querySelector(".lightbox-next").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
 }
-
 function lightboxNav(dir) {
   if (!lightboxPhotos.length) return;
   lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
   updateLightbox();
 }
-
 function closeLightbox() {
   const lb = document.getElementById("lightbox");
   lb.classList.remove("visible");
   setTimeout(() => lb.classList.remove("open"), 200);
 }
+
+renderGrid(PROFILES);
+document.getElementById('popup-overlay').style.display='flex';
+const hash = window.location.hash.replace("#","");
+if (hash && PROFILES.find(p => p.id === hash)) setTimeout(() => openProfile(hash), 100);
+</script>
 
 <div id="popup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center;">
   <div style="position:relative;max-width:320px;width:90%;">
@@ -721,12 +725,5 @@ function closeLightbox() {
     <p style="text-align:center;font-family:Helvetica,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-top:10px;letter-spacing:0.04em;">Bientôt disponible</p>
   </div>
 </div>
-<script>
-document.getElementById('popup-overlay').style.display='flex';
-</script>
-renderGrid(PROFILES);
-const hash = window.location.hash.replace("#","");
-if (hash && PROFILES.find(p => p.id === hash)) setTimeout(() => openProfile(hash), 100);
-</script>
 </body>
 </html>
