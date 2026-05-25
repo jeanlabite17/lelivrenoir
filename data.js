@@ -20,7 +20,7 @@ const PROFILES = [
     website: "https://laurentdemarly.fr/",
     socials: {
       instagram: "https://www.instagram.com/ldcoaching_/",
-      linkedin: "",
+      linkedin: "https://fr.linkedin.com/in/laurentdemarly64",
       twitter: "",
       github: "",
       tiktok: "",
