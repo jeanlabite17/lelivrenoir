@@ -18,7 +18,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #fff;
+      --bg: #f7f5f2;
       --bg2: #f5f5f5;
       --bg3: #ebebeb;
       --text: #0a0a0a;
@@ -47,9 +47,9 @@
       top: 0;
       z-index: 100;
       background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2.5rem;
-      height: 60px;
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -58,8 +58,8 @@
     .logo {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0;
+      font-size: 13px;
+      letter-spacing: -0.01em;
       text-transform: none;
       color: var(--text);
       text-decoration: none !important;
@@ -67,37 +67,39 @@
     }
 
     .nav-tagline {
-      font-size: 1rem;
-  font-weight: 700;
-  font-family: Helvetica, Arial, sans-serif;
-  color: var(--text);
-  letter-spacing: 0;
-}
+      font-size: 14px;
+      font-weight: 700;
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--text);
+      letter-spacing: 0;
+    }
     .nav-tagline-mobile {
-  display: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  font-family: Helvetica, Arial, sans-serif;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
+      display: none;
+      padding: 0.65rem 2rem;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--text);
+      border-bottom: 0.5px solid var(--border);
+      background: var(--bg);
+      text-align: center;
+    }
 
 @media (max-width: 640px) {
   .nav-tagline { display: none; }
   .nav-tagline-mobile { display: block; }
   nav { padding: 0 1.25rem; }
+  #search-input { width: 80px; }
 }
 
     .search-wrap {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
       background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 7px 13px;
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
       transition: border-color var(--ease);
     }
     .search-wrap:focus-within { border-color: var(--border2); }
@@ -107,10 +109,10 @@
       border: none;
       outline: none;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.83rem;
+      font-size: 12px;
       font-weight: 300;
       color: var(--text);
-      width: 200px;
+      width: 180px;
     }
     #search-input::placeholder { color: var(--muted); }
 
@@ -148,7 +150,12 @@
     .card {
       cursor: pointer;
       animation: fadeUp 0.4s both;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
     }
+    .card:hover { border-color: var(--border2); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
     .card:nth-child(2) { animation-delay: 0.05s; }
     .card:nth-child(3) { animation-delay: 0.1s; }
     .card:nth-child(4) { animation-delay: 0.15s; }
@@ -163,9 +170,8 @@
       aspect-ratio: 1;
       background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 8px 8px 0 0;
       overflow: hidden;
-      margin-bottom: 0.75rem;
       transition: border-color var(--ease);
     }
     .card-photo img {
@@ -185,14 +191,14 @@
     }
     .card-photo .placeholder svg { width: 32px; height: 32px; }
     .card:hover .card-photo { border-color: var(--border2); }
-    .card:hover .card-photo img { transform: scale(1.04); }
 
     .card-name {
       font-size: 0.9rem;
       font-weight: 700;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.01em;
       color: var(--text);
       margin-bottom: 3px;
+      padding: 0.75rem 0.75rem 0;
     }
     .card-profession {
       font-size: 0.72rem;
@@ -201,11 +207,13 @@
       text-transform: uppercase;
       letter-spacing: 0.07em;
       margin-bottom: 2px;
+      padding: 0 0.75rem;
     }
     .card-city {
       font-size: 0.72rem;
-      color: var(--muted2);
+      color: var(--text);
       font-weight: 300;
+      padding: 0 0.75rem 0.75rem;
     }
 
     .no-results {
@@ -372,11 +380,12 @@
       margin-bottom: 1rem;
     }
     .extra-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      columns: 2;
+      column-gap: 8px;
     }
     .extra-photo {
+      break-inside: avoid;
+      margin-bottom: 8px;
       border-radius: var(--radius);
       overflow: hidden;
       background: var(--bg2);
@@ -555,9 +564,11 @@ function renderGrid(profiles) {
           ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" loading="lazy" onerror="this.style.display='none'" />`
           : `<div class="placeholder">${personIcon()}</div>`}
       </div>
-      <p class="card-name">${p.firstName} ${p.lastName}</p>
-      <p class="card-profession">${p.profession}</p>
-      <p class="card-city">${p.city}</p>
+      <div style="border-top: 0.5px solid var(--border);">
+        <p class="card-name">${p.firstName} ${p.lastName}</p>
+        <p class="card-profession">${p.profession}</p>
+        <p class="card-city">${p.city}</p>
+      </div>
     </article>
   `).join("");
 }
@@ -595,11 +606,13 @@ function openProfile(id) {
   contact.innerHTML = "";
   if (p.phone) contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><a href="tel:${p.phone}">${p.phone}</a></li>`;
   if (p.website) contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><a href="${p.website}" target="_blank" rel="noopener">${p.website.replace(/^https?:\/\//,"")}</a></li>`;
+  if (p.website2) contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><a href="${p.website2}" target="_blank" rel="noopener">${p.website2.replace(/^https?:\/\//,"")}</a></li>`;
 
-  const activeSocials = Object.entries(p.socials||{}).filter(([,v])=>v);
+  const activeSocials = Object.entries(p.socials||{}).filter(([k,v])=>v && k !== 'instagram2');
   document.getElementById("modal-socials").innerHTML = activeSocials.map(([k,url]) =>
     `<a class="social-link" href="${url}" target="_blank" rel="noopener">${SOCIAL_ICONS[k]?.svg||""}${SOCIAL_ICONS[k]?.label||k}</a>`
   ).join("");
+  if (p.socials?.instagram2) document.getElementById("modal-socials").innerHTML += `<a class="social-link" href="${p.socials.instagram2}" target="_blank" rel="noopener">${SOCIAL_ICONS['instagram'].svg}Instagram 2</a>`;
 
   const extraPhotos = (p.photos||[]).filter(Boolean);
   const gallerySection = document.getElementById("gallery-section");
@@ -706,6 +719,17 @@ function closeLightbox() {
 renderGrid(PROFILES);
 const hash = window.location.hash.replace("#","");
 if (hash && PROFILES.find(p => p.id === hash)) setTimeout(() => openProfile(hash), 100);
+</script>
+
+<div id="popup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center;">
+  <div style="position:relative;max-width:320px;width:90%;">
+    <button onclick="document.getElementById('popup-overlay').style.display='none'" style="position:absolute;top:-12px;right:-12px;width:28px;height:28px;border-radius:50%;background:#fff;border:0.5px solid rgba(0,0,0,0.15);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:1000;">✕</button>
+    <img src="images/couverture-livre.jpg" style="width:100%;border-radius:10px;display:block;" alt="Couverture" />
+    <p style="text-align:center;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-top:10px;letter-spacing:0.04em;">Bientôt disponible</p>
+  </div>
+</div>
+<script>
+setTimeout(function(){ document.getElementById('popup-overlay').style.display='flex'; }, 500);
 </script>
 </body>
 </html>
