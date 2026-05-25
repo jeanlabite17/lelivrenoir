@@ -372,18 +372,18 @@
       margin-bottom: 1rem;
     }
     .extra-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      columns: 2;
+      column-gap: 8px;
     }
     .extra-photo {
+      break-inside: avoid;
+      margin-bottom: 8px;
       border-radius: var(--radius);
       overflow: hidden;
       background: var(--bg2);
       border: 1px solid var(--border);
     }
     .extra-photo img { width: 100%; height: auto; display: block; cursor: pointer; }
-
     /* LIGHTBOX */
     .lightbox {
       display: none;
