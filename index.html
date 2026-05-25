@@ -522,7 +522,7 @@ function personIcon() {
 function renderGrid(profiles) {
   const grid = document.getElementById("profile-grid");
   const count = document.getElementById("profile-count");
-  count.textContent = profiles.length + " membre" + (profiles.length > 1 ? "s" : "");
+  if (count) count.textContent = profiles.length + " membre" + (profiles.length > 1 ? "s" : "");
   if (!profiles.length) {
     grid.innerHTML = `<p class="no-results">Aucun profil trouvé.</p>`;
     return;
