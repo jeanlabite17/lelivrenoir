@@ -35,8 +35,7 @@ const PROFILES = [
     profession: "Construction et rénovation en bois",
     city: "Toulouse, Lacroix-Falgarde",
     bioTitle: "Témoignage d'escorte",
-    bio: "Comme je suis beau tu peux descendre le prix stp à -50% je suis un bon coup tu comprends? » lol tocard va te faire..
-te faire ........ aucun commentaire à rajouter. Je rêve.",
+    bio: "Comme je suis beau tu peux descendre le prix stp à -50% je suis un bon coup tu comprends? » lol tocard va te faire......... aucun commentaire à rajouter. Je rêve.",
     photo: "images/arnaud-dubois.jpg",
     photos: ["images/tes-arnaud-dubois.jpg", "images/arnaud-dubois2.jpg", "images/arnaud-dubois3.jpg", "images/dubois-concept.jpeg", "images/apéro-bois.jpg"],
     phone: "0630224403",
