@@ -66,9 +66,10 @@
     }
 
     .nav-tagline {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: Helvetica, Arial, sans-serif;
+      color: var(--text);
       letter-spacing: 0.04em;
     }
 
@@ -306,12 +307,19 @@
 
     .modal-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
 
-    .modal-bio {
+    .modal-bio-title {
       font-size: 0.88rem;
-      line-height: 1.85;
-      color: var(--text);
       font-weight: 700;
+      color: var(--text);
       margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .modal-bio {
+      font-size: 0.85rem;
+      line-height: 1.85;
+      color: #555;
+      font-weight: 300;
+      margin-top: 0;
     }
 
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -459,10 +467,7 @@
     </button>
 
     <div class="modal-layout">
-      <div>
-        <div class="modal-photo" id="modal-photo"></div>
-        <p class="modal-bio" id="modal-bio"></p>
-      </div>
+      <div class="modal-photo" id="modal-photo"></div>
       <div class="modal-info">
         <p class="modal-profession" id="modal-profession"></p>
         <h2 class="modal-name" id="modal-name"></h2>
@@ -471,6 +476,12 @@
         <ul class="contact-list" id="modal-contact"></ul>
         <div class="socials-row" id="modal-socials"></div>
       </div>
+    </div>
+
+    <div id="bio-section" style="display:none">
+      <div class="modal-divider"></div>
+      <p class="modal-bio-title" id="modal-bio-title"></p>
+      <p class="modal-bio" id="modal-bio"></p>
     </div>
 
     <div id="gallery-section" style="display:none">
@@ -555,7 +566,16 @@ function openProfile(id) {
   document.getElementById("modal-name").textContent = p.firstName + " " + p.lastName;
   document.getElementById("modal-profession").textContent = p.profession;
   document.getElementById("modal-city").textContent = p.city;
-  document.getElementById("modal-bio").textContent = p.bio;
+
+  const bioSection = document.getElementById("bio-section");
+  if (p.bio) {
+    document.getElementById("modal-bio-title").textContent = p.bioTitle || "";
+    document.getElementById("modal-bio-title").style.display = p.bioTitle ? "block" : "none";
+    document.getElementById("modal-bio").textContent = p.bio;
+    bioSection.style.display = "block";
+  } else {
+    bioSection.style.display = "none";
+  }
 
   const contact = document.getElementById("modal-contact");
   contact.innerHTML = "";
