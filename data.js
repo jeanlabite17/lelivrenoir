@@ -15,7 +15,7 @@ const PROFILES = [
     bioTitle: "Témoignage d'escorte",
     bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
     photo: "images/laurent-damarly.jpg",
-    photos: ["images/tess-laurent-damarly.jpg", "images/linkedin-laurent-damarly.jpg", "images/site-laurent-damarly.jpg"],
+    photos: ["images/tess-laurent-damarly.jpg", "images/site-laurent-damarly.jpg", "images/linkedin-laurent-damarly.jpg"],
     phone: "+33 7 49 76 59 27",
     website: "https://laurentdemarly.fr/",
     socials: {
