@@ -713,7 +713,7 @@ function closeLightbox() {
 }
 
 renderGrid(PROFILES);
-document.getElementById('popup-overlay').style.display='flex';
+setTimeout(function(){ document.getElementById('popup-overlay').style.display='flex'; }, 500);
 const hash = window.location.hash.replace("#","");
 if (hash && PROFILES.find(p => p.id === hash)) setTimeout(() => openProfile(hash), 100);
 </script>
