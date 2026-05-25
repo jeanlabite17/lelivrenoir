@@ -516,18 +516,45 @@
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()">✕ Fermer</button>
+
   <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
   </button>
+
   <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+
   <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
   </button>
+
   <span class="lightbox-counter" id="lightbox-counter"></span>
 </div>
 
 <script src="data.js"></script>
 <script>
+const lightbox = document.getElementById("lightbox");
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+lightbox.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+
+  const diff = touchStartX - touchEndX;
+
+  if (Math.abs(diff) < 60) return;
+
+  if (diff > 0) {
+    lightboxNav(1);
+  } else {
+    lightboxNav(-1);
+  }
+});
+</script>
 const SITE_URL = window.location.origin + window.location.pathname;
 
 const SOCIAL_ICONS = {
