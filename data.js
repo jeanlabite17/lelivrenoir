@@ -28,4 +28,29 @@ const PROFILES = [
       youtube: ""
     }
   }
+  ,{
+    id: "arnaud-dubois",
+    firstName: "Arnaud",
+    lastName: "DUBOIS",
+    profession: "Construction et rénovation en bois",
+    city: "Toulouse, Lacroix-Falgarde",
+    bioTitle: "Témoignage d'escorte",
+    bio: "Comme je suis beau tu peux descendre le prix stp à -50% je suis un bon coup tu comprends? » lol tocard va te faire..
+te faire ........ aucun commentaire à rajouter. Je rêve.",
+    photo: "images/arnaud-dubois.jpg",
+    photos: ["images/tes-arnaud-dubois.jpg", "images/arnaud-dubois2.jpg", "images/arnaud-dubois3.jpg", "images/dubois-concept.jpeg", "images/apéro-bois.jpg"],
+    phone: "0630224403",
+    website: "https://www.duboisconcept.fr/",
+    website: "https://apero-bois.fr/",
+    socials: {
+      instagram: "https://www.instagram.com/dubois.concept/",
+      instagram: "https://www.instagram.com/mcwood/",
+      linkedin: "https://fr.linkedin.com/in/arnaud-dubois-341102190",
+      twitter: "",
+      github: "",
+      tiktok: "",
+      facebook: "https://www.facebook.com/arnaud.mcwood/",
+      youtube: "https://www.youtube.com/@ArnaudDubois-t4t"
+    }
+  }
 ];
