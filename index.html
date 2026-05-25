@@ -65,11 +65,10 @@
       cursor: pointer;
     }
 
-   .nav-tagline {
-      font-size: 1rem;
-      font-weight: 700;
-      font-family: Helvetica, Arial, sans-serif;
-      color: var(--text);
+    .nav-tagline {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
       letter-spacing: 0.04em;
     }
 
@@ -251,9 +250,10 @@
     /* Layout profil : photo gauche + infos droite */
     .modal-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.6fr 1fr;
       gap: 3rem;
       margin-bottom: 3rem;
+      align-items: start;
     }
     @media (max-width: 640px) {
       .modal-layout { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -307,11 +307,11 @@
     .modal-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
 
     .modal-bio {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       line-height: 1.85;
-      color: #555;
-      font-weight: 300;
-      margin-bottom: 1.5rem;
+      color: var(--text);
+      font-weight: 700;
+      margin-top: 1rem;
     }
 
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -435,7 +435,7 @@
 
 <nav>
   <a class="logo" onclick="closeProfile()" href="#">lelivrenoir.</a>
-  <span class="nav-tagline">Le livre noir des clients d'escortes en France</span>
+  <span class="nav-tagline">Ton texte ici</span>
   <div class="search-wrap">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input id="search-input" type="search" placeholder="Rechercher un profil…" autocomplete="off" />
@@ -459,7 +459,10 @@
     </button>
 
     <div class="modal-layout">
-      <div class="modal-photo" id="modal-photo"></div>
+      <div>
+        <div class="modal-photo" id="modal-photo"></div>
+        <p class="modal-bio" id="modal-bio"></p>
+      </div>
       <div class="modal-info">
         <p class="modal-profession" id="modal-profession"></p>
         <h2 class="modal-name" id="modal-name"></h2>
@@ -467,7 +470,6 @@
         <div class="modal-divider"></div>
         <ul class="contact-list" id="modal-contact"></ul>
         <div class="socials-row" id="modal-socials"></div>
-        <p class="modal-bio" id="modal-bio"></p>
       </div>
     </div>
 
