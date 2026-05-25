@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+<link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Livre Noir Des Clients d'Escortes en France</title>
+  <meta name="description" content="Découvrez les profils du Livre Noir." />
+  <link rel="canonical" href="" id="canonical" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Le Livre Noir" />
+  <meta property="og:title" content="Le Livre Noir" id="og-title" />
+  <meta property="og:description" content="" id="og-desc" />
+  <meta property="og:image" content="" id="og-image" />
+  <script id="schema-jsonld" type="application/ld+json">{}</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fff;
+      --bg2: #f5f5f5;
+      --bg3: #ebebeb;
+      --text: #0a0a0a;
+      --muted: #999;
+      --muted2: #bbb;
+      --border: rgba(0,0,0,0.1);
+      --border2: rgba(0,0,0,0.25);
+      --radius: 3px;
+      --ease: 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--text);
+      text-decoration: none !important;
+      cursor: pointer;
+    }
+
+    .nav-tagline {
+      font-size: 1rem;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(--text);
+  letter-spacing: 0;
+}
+    .nav-tagline-mobile {
+  display: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+@media (max-width: 640px) {
+  .nav-tagline { display: none; }
+  .nav-tagline-mobile { display: block; }
+  nav { padding: 0 1.25rem; }
+}
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 7px 13px;
+      transition: border-color var(--ease);
+    }
+    .search-wrap:focus-within { border-color: var(--border2); }
+    .search-wrap svg { width: 14px; height: 14px; opacity: 0.4; flex-shrink: 0; }
+    #search-input {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: var(--text);
+      width: 200px;
+    }
+    #search-input::placeholder { color: var(--muted); }
+
+    /* MAIN */
+    main { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
+
+    .listing-header {
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .listing-title {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .listing-count {
+      font-size: 0.75rem;
+      color: var(--muted2);
+      letter-spacing: 0.06em;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; } }
+
+    .card {
+      cursor: pointer;
+      animation: fadeUp 0.4s both;
+    }
+    .card:nth-child(2) { animation-delay: 0.05s; }
+    .card:nth-child(3) { animation-delay: 0.1s; }
+    .card:nth-child(4) { animation-delay: 0.15s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+      transition: border-color var(--ease);
+    }
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-photo .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.15;
+    }
+    .card-photo .placeholder svg { width: 32px; height: 32px; }
+    .card:hover .card-photo { border-color: var(--border2); }
+    .card:hover .card-photo img { transform: scale(1.04); }
+
+    .card-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .card-profession {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 2px;
+    }
+    .card-city {
+      font-size: 0.72rem;
+      color: var(--muted2);
+      font-weight: 300;
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* MODAL PLEINE PAGE */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 300;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: block; }
+    .modal-overlay.visible { opacity: 1; }
+
+    .modal-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 6rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+    }
+    .modal-overlay.visible .modal-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      margin-bottom: 3rem;
+      transition: all var(--ease);
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--border2); }
+    .modal-close svg { width: 12px; height: 12px; }
+
+    /* Layout profil : photo gauche + infos droite */
+    .modal-layout {
+      display: grid;
+      grid-template-columns: 0.6fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .modal-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    .modal-photo {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .modal-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .modal-photo .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.1;
+    }
+    .modal-photo .placeholder svg { width: 72px; height: 72px; }
+
+    .modal-info { display: flex; flex-direction: column; justify-content: flex-start; padding-top: 0.5rem; }
+
+    .modal-profession {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .modal-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .modal-city {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .modal-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+
+    .modal-bio-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .modal-bio {
+      font-size: 0.85rem;
+      line-height: 1.85;
+      color: #555;
+      font-weight: 300;
+      margin-top: 0;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .contact-list li { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--text); }
+    .contact-list li svg { width: 13px; height: 13px; opacity: 0.4; flex-shrink: 0; }
+    .contact-list a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color var(--ease); }
+    .contact-list a:hover { border-color: var(--text); }
+
+    .socials-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 6px 12px;
+      transition: all var(--ease);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .social-link svg { width: 12px; height: 12px; }
+    .social-link:hover { color: var(--text); border-color: var(--border2); }
+
+    /* Galerie photos supplémentaires */
+    .gallery-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .extra-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .extra-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+    }
+    .extra-photo img { width: 100%; height: auto; display: block; cursor: pointer; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 500;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox.visible { opacity: 1; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      transition: border-color 0.15s;
+    }
+    .lightbox-close:hover { border-color: #fff; }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .lightbox-nav:hover { border-color: #fff; }
+    .lightbox-nav svg { width: 16px; height: 16px; }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" onclick="closeProfile()" href="#">lelivrenoir.</a>
+  <span class="nav-tagline">Le livre noir des clients d'escortes en France</span>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="search-input" type="search" placeholder="Rechercher un profil…" autocomplete="off" />
+  </div>
+</nav>
+  <div class="nav-tagline-mobile">Le livre noir des clients d'escortes en France</div>
+
+<main id="listing-view">
+  <div class="grid" id="profile-grid"></div>
+</main>
+
+<!-- Modal pleine page -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeProfile()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Fermer
+    </button>
+
+    <div class="modal-layout">
+      <div class="modal-photo" id="modal-photo"></div>
+      <div class="modal-info">
+        <p class="modal-profession" id="modal-profession"></p>
+        <h2 class="modal-name" id="modal-name"></h2>
+        <p class="modal-city" id="modal-city"></p>
+        <div class="modal-divider"></div>
+        <ul class="contact-list" id="modal-contact"></ul>
+        <div class="socials-row" id="modal-socials"></div>
+      </div>
+    </div>
+
+    <div id="bio-section" style="display:none">
+      <div class="modal-divider"></div>
+      <p class="modal-bio-title" id="modal-bio-title"></p>
+      <p class="modal-bio" id="modal-bio"></p>
+    </div>
+
+    <div id="gallery-section" style="display:none">
+      <div class="modal-divider"></div>
+      <p class="gallery-title">Photos</p>
+      <div class="extra-photos" id="modal-photos"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕ Fermer</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <span class="lightbox-counter" id="lightbox-counter"></span>
+</div>
+
+<script src="data.js"></script>
+<script>
+const SITE_URL = window.location.origin + window.location.pathname;
+
+const SOCIAL_ICONS = {
+  instagram: { label:"Instagram", svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>` },
+  linkedin:  { label:"LinkedIn",  svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>` },
+  twitter:   { label:"X / Twitter", svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M4 20 20 4"/></svg>` },
+  github:    { label:"GitHub",    svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>` },
+  tiktok:    { label:"TikTok",    svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>` },
+  facebook:  { label:"Facebook",  svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>` },
+  youtube:   { label:"YouTube",   svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>` },
+};
+
+function personIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+}
+
+function renderGrid(profiles) {
+  const grid = document.getElementById("profile-grid");
+  const count = document.getElementById("profile-count");
+  if (count) count.textContent = profiles.length + " membre" + (profiles.length > 1 ? "s" : "");
+  if (!profiles.length) {
+    grid.innerHTML = `<p class="no-results">Aucun profil trouvé.</p>`;
+    return;
+  }
+  grid.innerHTML = profiles.map((p, i) => `
+    <article class="card" onclick="openProfile('${p.id}')" role="button" tabindex="0"
+      aria-label="Voir le profil de ${p.firstName} ${p.lastName}"
+      style="animation-delay:${i*0.05}s"
+      onkeydown="if(event.key==='Enter')openProfile('${p.id}')">
+      <div class="card-photo">
+        ${p.photo
+          ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" loading="lazy" onerror="this.style.display='none'" />`
+          : `<div class="placeholder">${personIcon()}</div>`}
+      </div>
+      <p class="card-name">${p.firstName} ${p.lastName}</p>
+      <p class="card-profession">${p.profession}</p>
+      <p class="card-city">${p.city}</p>
+    </article>
+  `).join("");
+}
+
+document.getElementById("search-input").addEventListener("input", function() {
+  const q = this.value.toLowerCase().trim();
+  renderGrid(q
+    ? PROFILES.filter(p => (p.firstName+" "+p.lastName+" "+p.profession+" "+p.city).toLowerCase().includes(q))
+    : PROFILES);
+});
+
+function openProfile(id) {
+  const p = PROFILES.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById("modal-photo").innerHTML = p.photo
+    ? `<img src="${p.photo}" alt="${p.firstName} ${p.lastName}" />`
+    : `<div class="placeholder">${personIcon()}</div>`;
+
+  document.getElementById("modal-name").textContent = p.firstName + " " + p.lastName;
+  document.getElementById("modal-profession").textContent = p.profession;
+  document.getElementById("modal-city").textContent = p.city;
+
+  const bioSection = document.getElementById("bio-section");
+  if (p.bio) {
+    document.getElementById("modal-bio-title").textContent = p.bioTitle || "";
+    document.getElementById("modal-bio-title").style.display = p.bioTitle ? "block" : "none";
+    document.getElementById("modal-bio").textContent = p.bio;
+    bioSection.style.display = "block";
+  } else {
+    bioSection.style.display = "none";
+  }
+
+  const contact = document.getElementById("modal-contact");
+  contact.innerHTML = "";
+  if (p.phone) contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg><a href="tel:${p.phone}">${p.phone}</a></li>`;
+  if (p.website) contact.innerHTML += `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><a href="${p.website}" target="_blank" rel="noopener">${p.website.replace(/^https?:\/\//,"")}</a></li>`;
+
+  const activeSocials = Object.entries(p.socials||{}).filter(([,v])=>v);
+  document.getElementById("modal-socials").innerHTML = activeSocials.map(([k,url]) =>
+    `<a class="social-link" href="${url}" target="_blank" rel="noopener">${SOCIAL_ICONS[k]?.svg||""}${SOCIAL_ICONS[k]?.label||k}</a>`
+  ).join("");
+
+  const extraPhotos = (p.photos||[]).filter(Boolean);
+  const gallerySection = document.getElementById("gallery-section");
+  if (extraPhotos.length) {
+    document.getElementById("modal-photos").innerHTML = extraPhotos.map((src, i) =>
+      `<div class="extra-photo"><img src="${src}" alt="" loading="lazy" onclick="openLightbox(${i})" /></div>`
+    ).join("");
+    gallerySection.style.display = "block";
+  } else {
+    gallerySection.style.display = "none";
+  }
+
+  updateSEO(p);
+
+  const overlay = document.getElementById("modal-overlay");
+  overlay.classList.add("open");
+  overlay.scrollTop = 0;
+  requestAnimationFrame(() => overlay.classList.add("visible"));
+  document.body.style.overflow = "hidden";
+  history.pushState({ profileId: id }, "", "#" + id);
+}
+
+function closeProfile() {
+  const overlay = document.getElementById("modal-overlay");
+  overlay.classList.remove("visible");
+  setTimeout(() => overlay.classList.remove("open"), 250);
+  document.body.style.overflow = "";
+  history.pushState({}, "", window.location.pathname);
+  resetSEO();
+}
+
+function updateSEO(p) {
+  const fullName = p.firstName + " " + p.lastName;
+  const desc = `${fullName} — ${p.profession}, ${p.city}. ${p.bio.substring(0,130)}…`;
+  document.title = fullName + " — Le Livre Noir";
+  document.querySelector("meta[name='description']").setAttribute("content", desc);
+  document.getElementById("og-title").setAttribute("content", fullName + " — Le Livre Noir");
+  document.getElementById("og-desc").setAttribute("content", desc);
+  if (p.photo) document.getElementById("og-image").setAttribute("content", SITE_URL + p.photo);
+  document.getElementById("canonical").setAttribute("href", SITE_URL + "#" + p.id);
+  const schema = {
+    "@context":"https://schema.org","@type":"Person",
+    "name":fullName,"givenName":p.firstName,"familyName":p.lastName,
+    "jobTitle":p.profession,"description":p.bio,
+    "address":{"@type":"PostalAddress","addressLocality":p.city},
+    "url": SITE_URL + "#" + p.id
+  };
+  if (p.phone) schema.telephone = p.phone;
+  if (p.website) schema.url = p.website;
+  if (p.photo) schema.image = SITE_URL + p.photo;
+  if (p.socials?.linkedin) schema.sameAs = [p.socials.linkedin];
+  document.getElementById("schema-jsonld").textContent = JSON.stringify(schema);
+}
+
+function resetSEO() {
+  document.title = "Le Livre Noir — Annuaire";
+  document.querySelector("meta[name='description']").setAttribute("content","Découvrez les profils du Livre Noir.");
+  document.getElementById("schema-jsonld").textContent = "{}";
+}
+
+window.addEventListener("popstate", e => {
+  if (e.state?.profileId) openProfile(e.state.profileId);
+  else closeProfile();
+});
+window.addEventListener("keydown", e => {
+  if (e.key === "Escape") { closeLightbox(); closeProfile(); }
+  if (e.key === "ArrowLeft") lightboxNav(-1);
+  if (e.key === "ArrowRight") lightboxNav(1);
+});
+
+// LIGHTBOX
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(index) {
+  const imgs = document.querySelectorAll("#modal-photos .extra-photo img");
+  lightboxPhotos = Array.from(imgs).map(img => img.src);
+  lightboxIndex = index;
+  updateLightbox();
+  const lb = document.getElementById("lightbox");
+  lb.classList.add("open");
+  requestAnimationFrame(() => lb.classList.add("visible"));
+}
+
+function updateLightbox() {
+  document.getElementById("lightbox-img").src = lightboxPhotos[lightboxIndex];
+  document.getElementById("lightbox-counter").textContent = (lightboxIndex + 1) + " / " + lightboxPhotos.length;
+  document.querySelector(".lightbox-prev").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
+  document.querySelector(".lightbox-next").style.display = lightboxPhotos.length > 1 ? "flex" : "none";
+}
+
+function lightboxNav(dir) {
+  if (!lightboxPhotos.length) return;
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  updateLightbox();
+}
+
+function closeLightbox() {
+  const lb = document.getElementById("lightbox");
+  lb.classList.remove("visible");
+  setTimeout(() => lb.classList.remove("open"), 200);
+}
+
+renderGrid(PROFILES);
+const hash = window.location.hash.replace("#","");
+if (hash && PROFILES.find(p => p.id === hash)) setTimeout(() => openProfile(hash), 100);
+</script>
+</body>
+</html>
