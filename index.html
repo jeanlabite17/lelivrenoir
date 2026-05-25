@@ -67,11 +67,27 @@
 
     .nav-tagline {
       font-size: 1rem;
-      font-weight: 700;
-      font-family: Helvetica, Arial, sans-serif;
-      color: var(--text);
-      letter-spacing: 0;
-    }
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(--text);
+  letter-spacing: 0;
+}
+    .nav-tagline-mobile {
+  display: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+@media (max-width: 640px) {
+  .nav-tagline { display: none; }
+  .nav-tagline-mobile { display: block; }
+  nav { padding: 0 1.25rem; }
+}
 
     .search-wrap {
       display: flex;
@@ -449,6 +465,7 @@
     <input id="search-input" type="search" placeholder="Rechercher un profil…" autocomplete="off" />
   </div>
 </nav>
+  <div class="nav-tagline-mobile">Ton texte ici</div>
 
 <main id="listing-view">
   <div class="grid" id="profile-grid"></div>
