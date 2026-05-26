@@ -14,8 +14,8 @@ const PROFILES = [
     city: "Paris",
     bioTitle: "Témoignage d'escorte",
     bio: "Laurent 62 ans Chantage - négociation - culpabilisation - manipulation - insiste pour avoir des photos - fantasmeur.",
-    photo: "profil-laurent-damarly_kmegjk",
-    photos: ["tess-laurent-damarly_pvglv8", "linkedin-laurent-damarly_lsugjv", "site-laurent-damarly_plqeym"],
+    photo: "https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779774426/profil-laurent-damarly_kmegjk.jpg",
+    photos: ["https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779774427/tess-laurent-damarly_pvglv8.jpg", "https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779774427/linkedin-laurent-damarly_lsugjv.jpg", "https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779774427/site-laurent-damarly_plqeym.jpg"],
     phone: "+33 7 49 76 59 27",
     website: "https://laurentdemarly.fr/",
     socials: {
