@@ -55,7 +55,7 @@
       justify-content: space-between;
     }
 
-   .logo {
+    .logo {
       font-family: Helvetica, Arial, sans-serif;
       font-weight: 700;
       font-size: 13px;
@@ -69,24 +69,6 @@
       align-items: center;
       gap: 6px;
     }
-
-@media (max-width: 640px) {
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 3px;
-  }
-  .modal-layout {
-    grid-template-columns: 72px 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .modal-photo {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    overflow: hidden;
-    border:
 
     .nav-tagline {
       font-size: 14px;
@@ -106,13 +88,6 @@
       background: var(--bg);
       text-align: center;
     }
-
-@media (max-width: 640px) {
-  .nav-tagline { display: none; }
-  .nav-tagline-mobile { display: block; }
-  nav { padding: 0 1.25rem; }
-  #search-input { width: 80px; }
-}
 
     .search-wrap {
       display: flex;
@@ -304,26 +279,6 @@
       align-items: start;
     }
 
-@media (max-width: 640px) {
-  .modal-layout {
-    grid-template-columns: 72px 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .modal-photo img {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .modal-photo {
-    width: 72px;
-  }
-}
-    @media (max-width: 640px) {
-      .modal-layout { grid-template-columns: 1fr; gap: 1.5rem; }
-    }
-
     .modal-photo {
       width: 100%;
       border-radius: var(--radius);
@@ -503,12 +458,33 @@
       color: rgba(255,255,255,0.4);
       letter-spacing: 0.08em;
     }
+
+    @media (max-width: 640px) {
+      .logo { flex-direction: column; align-items: flex-start; gap: 3px; }
+      .nav-tagline { display: none; }
+      .nav-tagline-mobile { display: block; }
+      nav { padding: 0 1.25rem; }
+      #search-input { width: 80px; }
+      .modal-layout { grid-template-columns: 72px 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+      .modal-photo { width: 72px !important; height: 72px !important; border-radius: 50% !important; overflow: hidden; border: 0.5px solid var(--border) !important; background: var(--bg2); }
+      .modal-photo img { width: 72px !important; height: 72px !important; object-fit: cover !important; border-radius: 50% !important; }
+      .modal-name { font-size: 1.3rem; }
+      .modal-info { padding-top: 0; }
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+    }
   </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" onclick="closeProfile()" href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;">lelivrenoir.<span style="display:flex;gap:3px;"><span style="width:5px;height:5px;border-radius:50%;background:#002395;display:inline-block"></span><span style="width:5px;height:5px;border-radius:50%;background:#ddd;border:0.5px solid #ccc;display:inline-block"></span><span style="width:5px;height:5px;border-radius:50%;background:#ED2939;display:inline-block"></span></span></a>
+  <a class="logo" onclick="closeProfile()" href="#">lelivrenoir.<span style="display:flex;gap:3px;"><span style="width:5px;height:5px;border-radius:50%;background:#002395;display:inline-block"></span><span style="width:5px;height:5px;border-radius:50%;background:#ddd;border:0.5px solid #ccc;display:inline-block"></span><span style="width:5px;height:5px;border-radius:50%;background:#ED2939;display:inline-block"></span></span></a>
   <span class="nav-tagline">Le livre noir des clients d'escortes en France</span>
   <div class="search-wrap">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
