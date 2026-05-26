@@ -75,4 +75,27 @@ const PROFILES = [
       youtube: ""
     }
   }
+    ,{
+    id: "romain-forgione",
+    firstName: "Romain",
+    lastName: "FORGIONE",
+    profession: "Psychologue",
+    city: "Lyon",
+    bioTitle: "Témoignage d'escorte",
+    bio: "Il s'appelle Romain FORGIONE, 2 Rue de l'Humilité, 69003 Lyon, il m'a contacté pour un rdv de 30min: 150€ et m'a planté un LAPIN\nJe l'ai appelé a l'heure du rdv et il m'avait bloqué du coup je suis tombé sur son répondeur ou il disait s'appeller: Romain FORGIONE\net qu'il est Psychologue à Lyon et Grigny-sur-Rhône.\n\nBen pour un Psychologue c'est un bel enfoiré celui-là!\nM'avoir fait déplacer pour rien jusqu'à mon appartement pour le recevoir pour me planter un LAPIN!\n\nJe l'ai blacklisté définitivement",
+    photo: "https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779789970/Romain_FORGIONE_erzi9j.webp",
+    photos: ["https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779789969/Mode%CC%80le_r9xpw5.jpg", "https://res.cloudinary.com/dhkz4psdj/image/upload/q_auto,f_auto/v1779789969/Linked_iutngp.jpg"],
+    phone: "0760290244",
+    website: "https://www.doctolib.fr/psychologue/lyon/romain-forgione",
+    website2: "",
+    socials: {
+      instagram: "",
+      instagram2: "",
+      linkedin: "",
+      twitter: "",
+      tiktok: "",
+      facebook: "",
+      youtube: ""
+    }
+  }
 ];
