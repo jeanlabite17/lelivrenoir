@@ -52,4 +52,27 @@ const PROFILES = [
       youtube: "https://www.youtube.com/@ArnaudDubois-t4t"
     }
   }
+   ,{
+    id: "jerome-boissel",
+    firstName: "Jérôme",
+    lastName: "BOISSEL",
+    profession: "Enseignant-Chercheur-Référent",
+    city: "Créteil, Paris, Vichy, Clermont-ferrand, Tours",
+    bioTitle: "Témoignage d'escortes",
+    bio: "11/05 Ville: Paris Blacklisté depuis 2020 sur Sexemodele. Je confirme c’est un lapin  12/03 Ville: Créteil Gros fantasmer qui vous contacte tout les jours pour vous soûler mais ne prend jamais rdv perso j’ai bloquer son numéro je considère que c’est du foutage de gueule et perte de temps  02/12/2025 Ville: Paris Fantasmeur pressé. Veut un rdv rapidement. Espère que vous allez l'attendre dans un restaurant à consommer pour rien. Et sans culotte bien sûr!  19/10/2025 Ville: Paris Il demande mille conneries et ensuite il ne répond pas au téléphone le jour du rendez-vous.  14/10/2024 Ville: Vichy Faux plan.  14/08/2023 Appelle pour rdv dit qu’il a bien lu les conditions et va venir à Paris demande plein d’infos par tél et ensuite bloque .  13/09/2021 Fantasmeur! Stop fuyez les filles !  13/09/2021 Ville: Paris De très Long échanges , des informations +++ pour au final bloquer et ne plus donner signe de vie. Un fantasmeur. FUYEZ !",
+    photo: "images/jerome-boissel.jpg",
+    photos: ["images/jerome-boissel-2.jpg", "images/jerome-boissel-3.jpg", "images/jerome-boissel-4.jpg", "images/jerome-boissel-5.jpg", "images/jerome-boissel-6.jpg", "images/jerome-boissel-7.jpg", "images/jerome-boissel-8.jpg", "images/jerome-boissel-9.jpg", "images/jerome-boissel-10.jpg", "images/jerome-boissel-11.jpg"],
+    phone: "0652947847",
+    website: "https://www.ecofoot.fr/jeriome-boissel/",
+    website2: "https://www.clermont-sb.fr/en/national-recognition-for-our-sport-business-students/",
+    socials: {
+      instagram: "",
+      instagram2: "",
+      linkedin: "https://www.linkedin.com/in/jeromeboissel/",
+      twitter: "",
+      tiktok: "",
+      facebook: "",
+      youtube: ""
+    }
+  }
 ];
