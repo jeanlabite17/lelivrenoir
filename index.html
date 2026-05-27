@@ -39,6 +39,7 @@
       font-weight: 300;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* NAV */
@@ -237,6 +238,8 @@
       opacity: 0;
       transition: opacity 0.25s ease;
       overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
     }
     .modal-overlay.open { display: block; }
     .modal-overlay.visible { opacity: 1; }
@@ -732,6 +735,26 @@ function closeLightbox() {
   lb.classList.remove("visible");
   setTimeout(() => lb.classList.remove("open"), 200);
 }
+
+// Swipe tactile sur la lightbox
+(function() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    const lb = document.getElementById("lightbox");
+    if (!lb.classList.contains("open")) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) lightboxNav(1);
+      else lightboxNav(-1);
+    }
+  }, { passive: true });
+})();
 
 renderGrid(PROFILES);
 const hash = window.location.hash.replace("#","");
